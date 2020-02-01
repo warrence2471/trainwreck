@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17615715, g: 0.220465, b: 0.30279213, a: 1}
+  m_IndirectSpecularColor: {r: 0.17615695, g: 0.2204646, b: 0.3027915, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,9 +154,10 @@ MonoBehaviour:
   - {fileID: 5682946495448619769, guid: 737facfe093ac48a2abc1d70196707f5, type: 3}
   - {fileID: 5776656167115667987, guid: ede436c2d3cc544798bccec4ecc0c336, type: 3}
   - {fileID: 6121963497885629006, guid: 4709eb73b1115475b9657f633d510f6f, type: 3}
-  numberOfObjectsToGenerate: 20
-  maxLeft: 30
-  maxTop: 30
+  - {fileID: 4895709656378661252, guid: 7b52c771daff74962a0d452769d8b23e, type: 3}
+  numberOfObjectsToGenerate: 40
+  maxLeft: 20
+  maxTop: 20
 --- !u!4 &43203545
 Transform:
   m_ObjectHideFlags: 0
@@ -2564,6 +2565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   woodSprite: {fileID: 21300000, guid: ed9388187aa3146ecbf3ccdb8f7fd5ab, type: 3}
   stoneSprite: {fileID: 21300000, guid: 2577c66fb83da47aab85f6bb843446a1, type: 3}
+  cowSpraySprite: {fileID: 21300000, guid: 1278b5e181eee485dbf6704d8ce90f38, type: 3}
   toolSprite: {fileID: 21300000, guid: 43788e9611b6e4ed6bf3acabef4e486c, type: 3}
   player: {fileID: 481731177}
   ownSlot: 0
