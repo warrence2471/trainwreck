@@ -15,12 +15,6 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Added excitement
-        transform.position = new Vector3(
-            transform.position.x,
-            0.5f + Mathf.Sin(Time.timeSinceLevelLoad * 50) / 12,
-            transform.position.z);
-
         // WASD + Cursor Keys
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
