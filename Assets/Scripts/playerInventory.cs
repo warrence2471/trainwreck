@@ -36,15 +36,18 @@ public class playerInventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        { // if left button pressed...
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+        RaycastHit hit;
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        Debug.DrawRay(transform.position, fwd * 2, Color.green);
+        if (Physics.Raycast(transform.position, fwd, out hit, 2))
+        {
+            if (hit.collider.tag == "pickup")
             {
-                if (hit.collider.tag == "pickup") {
-                    this.selectedPickup = hit.collider.gameObject;
-                }
+                this.selectedPickup = hit.collider.gameObject;
+            }
+            else
+            {
+                this.selectedPickup = null;
             }
         }
 
