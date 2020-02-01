@@ -117,7 +117,7 @@ public class GameTrain : MonoBehaviour
         if (smokeScript) smokeScript.smokeActive = true;
     }
 
-    private void StopTrain()
+    public void StopTrain()
     {
         Debug.Log($"{name} stops driving");
         isDriving = false;
