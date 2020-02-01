@@ -367,7 +367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: wood
-  player: {fileID: 0}
 --- !u!65 &1505214536644673193
 BoxCollider:
   m_ObjectHideFlags: 0

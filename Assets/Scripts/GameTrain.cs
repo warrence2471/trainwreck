@@ -6,27 +6,33 @@ public class GameTrain : MonoBehaviour
 {
     [SerializeField]
     public float maxSpeed = 1.5f;
-
     [SerializeField]
     public GameObject smoke;
+    [SerializeField]
+    public float smokeAge = 0.2f;
+    [SerializeField]
+    public float acceleration = 0.1f;
+    [SerializeField]
+    public float negativeAcceleration = 0.3f;
 
     private float age = 0.0f;
-    private float smokeAge = 0.2f;
     private bool isDriving = false;
     private float currentSpeed = 0;
-    private float acceleration = 0.1f;
-    private float negativeAcceleration = 0.3f;
 
-    private Rigidbody myRigidbody;
-    private Transform myTransform;
-    
+    private bool isTurning = false;
+    private float currentTurnAngle;
+    private Collider turn;
+    private float turnIncrement;
+    private float turnDir;
+    private Vector3 turnAnchor;
+
+    private const float CUpdatesPerSecond = 120;
+    private const float CTurnExtent = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody>();
-        myTransform = GetComponent<Transform>();
-
-        startTrain();
+        StartTrain();
     }
 
     // Update is called once per frame
@@ -38,7 +44,7 @@ public class GameTrain : MonoBehaviour
             if (age > smokeAge)
             {
                 age = 0;
-                Instantiate(smoke, new Vector3(transform.position.x + 0.4f, transform.position.y + 0.4f, transform.position.z), Quaternion.identity);
+                Instantiate(smoke, transform.position + 0.4f * transform.forward + 0.4f * transform.up, Quaternion.identity);
             }
 
             if (currentSpeed < maxSpeed)
@@ -55,21 +61,84 @@ public class GameTrain : MonoBehaviour
         }
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-        myTransform.position = myTransform.position + myTransform.forward * currentSpeed / 120;
+        if (!isTurning)
+        {
+            transform.position += transform.forward * currentSpeed / CUpdatesPerSecond;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        myTransform.Rotate(0, 25f, 0);
+        if (isTurning)
+        {
+            if (other == turn)
+            {
+                var incrementAngle = currentSpeed * turnIncrement;
+                currentTurnAngle += incrementAngle;
+                if (currentTurnAngle < 90)
+                {
+                    transform.RotateAround(turnAnchor, Vector3.up, turnDir * incrementAngle);
+                }
+                else
+                {
+                    var forward = turnDir > 0 ? turn.transform.forward : turn.transform.right;
+                    var end = turn.transform.position + forward * CTurnExtent;
+                    transform.position = new Vector3(end.x, transform.position.y, end.z);
+                    transform.forward = forward;
+                    StopTurning();
+                }
+            }
+        }
+        else 
+        {
+            // Collider is a railturn and the center of the loco is within the collider
+            if (IsCollidingRailturn(other) && other.bounds.Contains(transform.position))
+            {
+                StartTurning(other);
+            }
+        }
     }
 
-    public void startTrain()
+    private bool IsCollidingRailturn(Collider other)
     {
-        this.isDriving = true;
+        return other.gameObject.CompareTag("railturn");
     }
 
-    public void stopTrain()
+    private void StartTrain()
     {
-        this.isDriving = false;
+        Debug.Log("Start driving");
+        isDriving = true;
+    }
+
+    private void StopTrain()
+    {
+        Debug.Log("Stop driving");
+        isDriving = false;
+    }
+
+    private void StartTurning(Collider other)
+    {
+        Debug.Log("Start turning");
+        isTurning = true;
+        turn = other;
+        currentTurnAngle = 0;
+
+        turnAnchor = turn.transform.position + (turn.transform.forward + turn.transform.right) * CTurnExtent;
+        turnIncrement = Mathf.Rad2Deg / CUpdatesPerSecond / turn.bounds.extents.x * 3; // TODO *3?
+        var turnVector = turn.transform.forward + turn.transform.right + transform.forward;
+        if (Vector3.Dot(turnVector, transform.right) < 0)
+        {
+            turnDir = -1;
+        }
+        else
+        {
+            turnDir = 1;
+        }
+    }
+
+    private void StopTurning()
+    {
+        Debug.Log("Stop turning");
+        isTurning = false;
     }
 }
