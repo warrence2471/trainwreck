@@ -9,7 +9,7 @@ public class trainMainMenuBehaviour : MonoBehaviour
     [SerializeField]
     public GameObject smoke;
     private float age = 0.0f;
-    private float smokeAge = 0.1f;
+    private float smokeAge = 0.2f;
     private float currentSpeed = 0;
     public float maxSpeed = 100;
     public float acceleration = 1;
@@ -24,7 +24,7 @@ public class trainMainMenuBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDriving)
+        if(isDriving)
         {
           age += Time.deltaTime;
           if (age > smokeAge / (currentSpeed * 20 + 0.01f)) {
@@ -62,6 +62,10 @@ public class trainMainMenuBehaviour : MonoBehaviour
     public void startTrain()
     {
         this.isDriving = true;
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        foreach (AudioSource audioSource in audioSources) {
+            audioSource.Play();
+        }
     }
 
     public void stopTrain()
