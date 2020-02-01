@@ -24,6 +24,7 @@ public class GameTrain : MonoBehaviour
     private float currentSpeed = 0;
     private float currentTurnAngle;
     private Collider turn;
+    private Collider lastTurn;
     private float turnIncrement;
     private float turnDir;
     private Vector3 turnAnchor;
@@ -112,7 +113,7 @@ public class GameTrain : MonoBehaviour
         else 
         {
             // Collider is a railturn and the center of the loco is within the collider
-            if (IsCollidingRailturn(other) && other.bounds.Contains(transform.position))
+            if (other != lastTurn && IsCollidingRailturn(other) && other.bounds.Contains(transform.position))
             {
                 StartTurning(other);
             }
@@ -160,5 +161,6 @@ public class GameTrain : MonoBehaviour
     {
         Debug.Log($"{name} stops turning");
         IsTurning = false;
+        lastTurn = turn;
     }
 }
