@@ -17,7 +17,7 @@ public class pickupFactory : MonoBehaviour
             var x = Random.Range(-maxLeft, maxLeft);
             var z = Random.Range(-maxTop, maxTop);
             var itemIndex = Random.Range(0, pickupList.Count);
-            var pos = new Vector3(x, .2f, z);
+            var pos = new Vector3(x, 0, z);
 
             Instantiate(pickupList[itemIndex], pos, Quaternion.identity);
         }

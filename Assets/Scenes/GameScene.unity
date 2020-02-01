@@ -151,11 +151,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupList:
-  - {fileID: 612937112855891065, guid: 4ae23628762dc4658abfa9860c286254, type: 3}
-  - {fileID: 7090679349976102530, guid: 5b18d8d97bfe44cc09f4f3165ee8404b, type: 3}
+  - {fileID: 1572094606406707895, guid: 737facfe093ac48a2abc1d70196707f5, type: 3}
+  - {fileID: 5776656167115667987, guid: ede436c2d3cc544798bccec4ecc0c336, type: 3}
   numberOfObjectsToGenerate: 20
-  maxLeft: 100
-  maxTop: 100
+  maxLeft: 30
+  maxTop: 30
 --- !u!4 &43203545
 Transform:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ Transform:
   m_LocalScale: {x: 0.25, y: 1, z: 0.25}
   m_Children: []
   m_Father: {fileID: 481731178}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &302324662
 CapsuleCollider:
@@ -515,8 +515,8 @@ Transform:
   m_LocalPosition: {x: -3.289, y: 4.4, z: -1.04}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.25}
   m_Children:
-  - {fileID: 1204477345}
   - {fileID: 302324661}
+  - {fileID: 1204477345}
   - {fileID: 2037171613}
   m_Father: {fileID: 1294093300}
   m_RootOrder: 0
