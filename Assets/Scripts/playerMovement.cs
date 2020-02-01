@@ -7,6 +7,7 @@ public class playerMovement : MonoBehaviour
 {
     Rigidbody rb;
     public Image overlayTint;
+    public int speed = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -20,23 +21,23 @@ public class playerMovement : MonoBehaviour
         // WASD + Cursor Keys
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            rb.velocity += Vector3.right * Time.deltaTime * 10;
+            rb.velocity += Vector3.right * Time.deltaTime * speed;
         }
         else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            rb.velocity += Vector3.left * Time.deltaTime * 10;
+            rb.velocity += Vector3.left * Time.deltaTime * speed;
         }
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            rb.velocity += Vector3.forward * Time.deltaTime * 10;
+            rb.velocity += Vector3.forward * Time.deltaTime * speed;
         }
         else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
-            rb.velocity += Vector3.back * Time.deltaTime * 10;
+            rb.velocity += Vector3.back * Time.deltaTime * speed;
         }
 
         // "Friction"
-        rb.velocity *= 0.99f;
+        rb.velocity *= 0.79f;
 
         // Look towards mouse cursor
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
