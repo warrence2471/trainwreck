@@ -37,8 +37,13 @@ public class trainMainMenuBehaviour : MonoBehaviour
             currentSpeed = 0;
         }
 
+
+        var newYposition = startYposition;
+        if (currentSpeed == 0) {
+            newYposition = startYposition + (Mathf.Sin(Time.timeSinceLevelLoad * 20) + 1) / 40;
+        }
+
         var newXposition = transform.position.x + currentSpeed;
-        var newYposition = startYposition + (Mathf.Sin(Time.timeSinceLevelLoad * 10) + 1) / 40;
         transform.position = new Vector3(newXposition, newYposition, transform.position.z);
     }
 
