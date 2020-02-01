@@ -8,7 +8,7 @@ public class mainMenuBehaviour : MonoBehaviour
     public GameObject maleCharacter;
     public GameObject femaleCharacter;
     [SerializeField]
-    private string selectedCharacter = "female";
+    private string selectedCharacter = "male";
     private Animator maleAnimator;
     private Animator femaleAnimator;
 
@@ -19,6 +19,8 @@ public class mainMenuBehaviour : MonoBehaviour
 
         maleAnimator.SetBool("isVisible", true);
         femaleAnimator.SetBool("isVisible", false);
+
+        PlayerVars.CharacterModel = selectedCharacter;
     }
 
 
@@ -36,6 +38,7 @@ public class mainMenuBehaviour : MonoBehaviour
         }
 
         selectedCharacter = selectedCharacter == "male" ? "female" : "male";
+        PlayerVars.CharacterModel = selectedCharacter;
     }
 
 
