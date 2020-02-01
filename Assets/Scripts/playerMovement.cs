@@ -64,6 +64,8 @@ public class playerMovement : MonoBehaviour
         if (other.gameObject.name == "Game Loco") {
             Debug.Log("Aua! Pass doch auf!");
             overlayTint.color = new Color(1, 0, 0, 1);
+            AudioSource audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
         } else
             Debug.Log("Autsch");
     }
