@@ -7,6 +7,8 @@ public class GameTrain : MonoBehaviour
     [SerializeField]
     public float maxSpeed = 1.5f;
     [SerializeField]
+    public bool makeSmoke = true;
+    [SerializeField]
     public GameObject smoke;
     [SerializeField]
     public float smokeAge = 0.2f;
@@ -40,11 +42,14 @@ public class GameTrain : MonoBehaviour
     {
         if (isDriving)
         {
-            age += Time.deltaTime;
-            if (age > smokeAge)
+            if (makeSmoke)
             {
-                age = 0;
-                Instantiate(smoke, transform.position + 0.4f * transform.forward + 0.4f * transform.up, Quaternion.identity);
+                age += Time.deltaTime;
+                if (age > smokeAge)
+                {
+                    age = 0;
+                    Instantiate(smoke, transform.position + 0.2f * transform.forward + 0.5f * transform.up, Quaternion.identity);
+                }
             }
 
             if (currentSpeed < maxSpeed)
