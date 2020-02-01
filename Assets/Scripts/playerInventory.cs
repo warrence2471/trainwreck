@@ -51,14 +51,14 @@ public class playerInventory : MonoBehaviour
 
         if (selectedPickup)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 addItem(selectedPickup.GetComponent<pickupController>().itemName, 0);
                 Destroy(selectedPickup.gameObject);
                 selectedPickup = null;
             }
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 addItem(selectedPickup.GetComponent<pickupController>().itemName, 1);
                 Destroy(selectedPickup.gameObject);
