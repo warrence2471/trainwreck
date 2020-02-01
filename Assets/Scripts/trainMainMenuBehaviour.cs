@@ -52,7 +52,7 @@ public class trainMainMenuBehaviour : MonoBehaviour
 
         var newYposition = startYposition;
         if (currentSpeed == 0) {
-            newYposition = startYposition + (Mathf.Sin(Time.timeSinceLevelLoad * 20) + 1) / 40;
+            newYposition = startYposition + (Mathf.Sin(Time.timeSinceLevelLoad * 20) + 1) / 200;
         }
 
         var newXposition = transform.position.x + currentSpeed;

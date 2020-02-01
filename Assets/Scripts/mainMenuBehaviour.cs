@@ -5,6 +5,43 @@ using UnityEngine.SceneManagement;
 
 public class mainMenuBehaviour : MonoBehaviour
 {
+    public GameObject maleCharacter;
+    public GameObject femaleCharacter;
+    [SerializeField]
+    private string selectedCharacter = "male";
+    private Animator maleAnimator;
+    private Animator femaleAnimator;
+
+    void Awake()
+    {
+        maleAnimator = maleCharacter.GetComponent<Animator>();
+        femaleAnimator = femaleCharacter.GetComponent<Animator>();
+
+        maleAnimator.SetBool("isVisible", true);
+        femaleAnimator.SetBool("isVisible", false);
+
+        PlayerVars.CharacterModel = selectedCharacter;
+    }
+
+
+    public void toggleCharacter()
+    {
+        if (selectedCharacter != "male")
+        {
+            maleAnimator.SetBool("isVisible", true);
+            femaleAnimator.SetBool("isVisible", false);
+        }
+        else
+        {
+            maleAnimator.SetBool("isVisible", false);
+            femaleAnimator.SetBool("isVisible", true);
+        }
+
+        selectedCharacter = selectedCharacter == "male" ? "female" : "male";
+        PlayerVars.CharacterModel = selectedCharacter;
+    }
+
+
     public void startGame()
     {
         StartCoroutine(StartGameCoroutine());

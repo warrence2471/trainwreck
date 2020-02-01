@@ -9,11 +9,30 @@ public class playerMovement : MonoBehaviour
     public Image overlayTint;
     public int speed = 50;
 
+    public GameObject maleCharacter;
+    public GameObject femaleCharacter;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
+
+
+    void Awake()
+    {
+        if(PlayerVars.CharacterModel == "male")
+        {
+            maleCharacter.SetActive(true);
+            femaleCharacter.SetActive(false);
+        }
+        else
+        {
+            maleCharacter.SetActive(false);
+            femaleCharacter.SetActive(true);
+        }
+    }
+
 
     // Update is called once per frame
     void Update()

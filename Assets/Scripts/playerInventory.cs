@@ -5,8 +5,6 @@ using UnityEngine;
 public class playerInventory : MonoBehaviour
 {
     public List<string> items = new List<string>(2);
-    public GameObject selectedPickup;
-
 
     private bool hasItem(string itemName)
     {
@@ -20,9 +18,10 @@ public class playerInventory : MonoBehaviour
 
     public bool useItem(string itemName)
     {
-        if(hasItem(itemName))
+        if (hasItem(itemName))
         {
-            items.Remove(itemName);
+            int index = items.IndexOf(itemName);
+            items[index] = null;
             return true;
         }
 
@@ -36,36 +35,41 @@ public class playerInventory : MonoBehaviour
 
     void Update()
     {
+        int inventorySlot = -1;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            inventorySlot = 0;
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            inventorySlot = 1;
+        else
+            return;
+
+        GameObject targetItem = null;
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         Debug.DrawRay(transform.position, fwd * 2, Color.green);
         if (Physics.Raycast(transform.position, fwd, out hit, 2))
         {
-            if (hit.collider.tag == "pickup")
-            {
-                this.selectedPickup = hit.collider.gameObject;
-            }
-            else
-            {
-                this.selectedPickup = null;
-            }
+            targetItem = hit.collider.gameObject;
         }
 
+        if (!targetItem) return;
 
-        if (selectedPickup)
+        if (targetItem.tag == "pickup")
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                addItem(selectedPickup.GetComponent<pickupController>().itemName, 0);
-                Destroy(selectedPickup.gameObject);
-                selectedPickup = null;
-            }
+            addItem(targetItem.GetComponent<pickupController>().itemName, inventorySlot);
+            Destroy(targetItem.gameObject);
+        }
+        else if (targetItem.tag == "repair")
+        {
+            string neededItem = targetItem.GetComponent<repairController>().itemName;
+            Debug.Log("Trying to repair " + targetItem.name + " now - need " + neededItem + " to do so.");
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                addItem(selectedPickup.GetComponent<pickupController>().itemName, 1);
-                Destroy(selectedPickup.gameObject);
-                selectedPickup = null;
+            if (hasItem(neededItem)) {
+                Debug.Log("Item found!");
+                useItem(neededItem);
+                Destroy(targetItem.gameObject);
+            } else {
+                Debug.Log("Do not have the item");
             }
         }
     }

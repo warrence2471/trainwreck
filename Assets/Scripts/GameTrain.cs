@@ -7,12 +7,6 @@ public class GameTrain : MonoBehaviour
     [SerializeField]
     public float maxSpeed = 1.5f;
     [SerializeField]
-    public bool makeSmoke = true;
-    [SerializeField]
-    public GameObject smoke;
-    [SerializeField]
-    public float smokeAge = 0.2f;
-    [SerializeField]
     public float acceleration = 0.1f;
     [SerializeField]
     public float negativeAcceleration = 0.3f;
@@ -46,16 +40,6 @@ public class GameTrain : MonoBehaviour
     {
         if (isDriving)
         {
-            if (makeSmoke)
-            {
-                age += Time.deltaTime;
-                if (age > smokeAge)
-                {
-                    age = 0;
-                    Instantiate(smoke, transform.position + 0.2f * transform.forward + 0.5f * transform.up, Quaternion.identity);
-                }
-            }
-
             if (currentSpeed < maxSpeed)
             {
                 currentSpeed += acceleration * Time.deltaTime;
@@ -129,12 +113,16 @@ public class GameTrain : MonoBehaviour
     {
         Debug.Log($"{name} starts driving");
         isDriving = true;
+        SmokeEmitter smokeScript = GetComponent<SmokeEmitter>();
+        if (smokeScript) smokeScript.smokeActive = true;
     }
 
-    private void StopTrain()
+    public void StopTrain()
     {
         Debug.Log($"{name} stops driving");
         isDriving = false;
+        SmokeEmitter smokeScript = GetComponent<SmokeEmitter>();
+        if (smokeScript) smokeScript.smokeActive = true;
     }
 
     private void StartTurning(Collider other)

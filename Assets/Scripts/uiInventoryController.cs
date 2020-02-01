@@ -33,12 +33,14 @@ public class uiInventoryController : MonoBehaviour
 
             if (item == "wood")
                 childImage.GetComponent<Image>().sprite = woodSprite;
-            if (item == "stone")
+            else if (item == "stone")
                 childImage.GetComponent<Image>().sprite = stoneSprite;
-            if (item == "cowspray")
+            else if (item == "cowspray")
                 childImage.GetComponent<Image>().sprite = cowSpraySprite;
-            if (item == "tool")
+            else if (item == "tool")
                 childImage.GetComponent<Image>().sprite = toolSprite;
+            else
+                childImage.GetComponent<Image>().sprite = null;
         }
     }
 }
