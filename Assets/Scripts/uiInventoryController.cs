@@ -7,6 +7,7 @@ public class uiInventoryController : MonoBehaviour
 {
     public Sprite woodSprite;
     public Sprite stoneSprite;
+    public Sprite cowSpraySprite;
 
     public GameObject player;
     public int ownSlot = 0;
@@ -32,6 +33,8 @@ public class uiInventoryController : MonoBehaviour
                 childImage.GetComponent<Image>().sprite = woodSprite;
             if (item == "stone")
                 childImage.GetComponent<Image>().sprite = stoneSprite;
+            if (item == "cowspray")
+                childImage.GetComponent<Image>().sprite = cowSpraySprite;
         }
     }
 }
