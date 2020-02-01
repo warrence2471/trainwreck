@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerMovement : MonoBehaviour
 {
     Rigidbody rb;
+    public Image overlayTint;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +42,25 @@ public class playerMovement : MonoBehaviour
         Vector3 vec = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         Vector3 viewDir = new Vector3(vec.x, 0, vec.y);
         transform.rotation = Quaternion.LookRotation(viewDir, Vector3.up);
+
+        if (overlayTint.color.a > 0)
+        {
+            overlayTint.color = new Color(
+                overlayTint.color.r,
+                overlayTint.color.g,
+                overlayTint.color.b,
+                overlayTint.color.a - (0.66f * Time.deltaTime)
+            );
+        }
+
     }
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Autsch");
+        if (other.gameObject.name == "Game Loco") {
+            Debug.Log("Aua! Pass doch auf!");
+            overlayTint.color = new Color(1, 0, 0, 1);
+        } else
+            Debug.Log("Autsch");
     }
 }

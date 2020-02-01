@@ -25,10 +25,11 @@ public class uiInventoryController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < transform.childCount; i++)
+        int ui_offset = 1;
+        for(int i = 0; i < transform.childCount - ui_offset; i++)
         {
             var item = inventory.getItemInSlot(i);
-            var childImage = transform.GetChild(i);
+            var childImage = transform.GetChild(ui_offset + i);
 
             if (item == "wood")
                 childImage.GetComponent<Image>().sprite = woodSprite;
