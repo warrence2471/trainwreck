@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17615695, g: 0.2204646, b: 0.3027915, a: 1}
+  m_IndirectSpecularColor: {r: 0.17615715, g: 0.220465, b: 0.30279213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -189,6 +189,11 @@ PrefabInstance:
       propertyPath: smoke
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: -5470126468189855952, guid: 75e4e81dddf2a9249a1147f8f9058261,
+        type: 3}
+      propertyPath: preceding
+      value: 
+      objectReference: {fileID: 430919074}
     - target: {fileID: 3721050786812299566, guid: 75e4e81dddf2a9249a1147f8f9058261,
         type: 3}
       propertyPath: m_Name
@@ -592,6 +597,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &430919074 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5470126468189855952, guid: db4fd09a606713c47a4e7d7a9a0399d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5962336987536675686}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be43575ca8890fe4fadd6dfb5a9bc6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &481731177
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +921,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 543292897}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &581191654 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6997936448396007460, guid: 5bcab3ecbbb59744385265ea9d53fdc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 171278802940395583}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be43575ca8890fe4fadd6dfb5a9bc6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &672850982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2655,6 +2684,11 @@ PrefabInstance:
       propertyPath: makeSmoke
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5470126468189855952, guid: db4fd09a606713c47a4e7d7a9a0399d6,
+        type: 3}
+      propertyPath: preceding
+      value: 
+      objectReference: {fileID: 2125188858}
     - target: {fileID: 3721050786812299566, guid: db4fd09a606713c47a4e7d7a9a0399d6,
         type: 3}
       propertyPath: m_Name
@@ -3379,6 +3413,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103723057}
   m_CullTransparentMesh: 0
+--- !u!114 &2125188858 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5470126468189855952, guid: 75e4e81dddf2a9249a1147f8f9058261,
+    type: 3}
+  m_PrefabInstance: {fileID: 115555963}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be43575ca8890fe4fadd6dfb5a9bc6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &171278802940395583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3570,6 +3616,11 @@ PrefabInstance:
       propertyPath: makeSmoke
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5470126468189855952, guid: db4fd09a606713c47a4e7d7a9a0399d6,
+        type: 3}
+      propertyPath: preceding
+      value: 
+      objectReference: {fileID: 581191654}
     - target: {fileID: 3721050786812299566, guid: db4fd09a606713c47a4e7d7a9a0399d6,
         type: 3}
       propertyPath: m_Name

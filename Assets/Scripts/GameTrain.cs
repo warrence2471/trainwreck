@@ -16,12 +16,12 @@ public class GameTrain : MonoBehaviour
     public float acceleration = 0.1f;
     [SerializeField]
     public float negativeAcceleration = 0.3f;
+    [SerializeField]
+    public GameTrain preceding;
 
     private float age = 0.0f;
     private bool isDriving = false;
     private float currentSpeed = 0;
-
-    private bool isTurning = false;
     private float currentTurnAngle;
     private Collider turn;
     private float turnIncrement;
@@ -30,6 +30,9 @@ public class GameTrain : MonoBehaviour
 
     private const float CUpdatesPerSecond = 120;
     private const float CTurnExtent = 0.5f;
+    private const float CWagonDistance = 0.75f;
+
+    public bool IsTurning { get; set; } = false;
 
     // Start is called before the first frame update
     void Start()
@@ -66,15 +69,22 @@ public class GameTrain : MonoBehaviour
         }
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-        if (!isTurning)
+        if (!IsTurning)
         {
-            transform.position += transform.forward * currentSpeed / CUpdatesPerSecond;
+            if (preceding == null || preceding.IsTurning)
+            {
+                transform.position += transform.forward * currentSpeed / CUpdatesPerSecond;
+            }
+            else
+            {
+                transform.position = preceding.transform.position - CWagonDistance * preceding.transform.forward;
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (isTurning)
+        if (IsTurning)
         {
             if (other == turn)
             {
@@ -86,10 +96,9 @@ public class GameTrain : MonoBehaviour
                 }
                 else
                 {
-                    var forward = turnDir > 0 ? turn.transform.forward : turn.transform.right;
-                    var end = turn.transform.position + forward * CTurnExtent;
+                    transform.forward = turnDir > 0 ? turn.transform.forward : turn.transform.right;
+                    var end = turn.transform.position + transform.forward * CTurnExtent;
                     transform.position = new Vector3(end.x, transform.position.y, end.z);
-                    transform.forward = forward;
                     StopTurning();
                 }
             }
@@ -124,7 +133,7 @@ public class GameTrain : MonoBehaviour
     private void StartTurning(Collider other)
     {
         Debug.Log("Start turning");
-        isTurning = true;
+        IsTurning = true;
         turn = other;
         currentTurnAngle = 0;
 
@@ -144,6 +153,6 @@ public class GameTrain : MonoBehaviour
     private void StopTurning()
     {
         Debug.Log("Stop turning");
-        isTurning = false;
+        IsTurning = false;
     }
 }
