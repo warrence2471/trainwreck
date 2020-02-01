@@ -1414,7 +1414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 5, z: -5}
+  m_LocalPosition: {x: 0, y: 3, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2528,11 +2528,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 377983987}
     m_Modifications:
-    - target: {fileID: 6997936448396007459, guid: 5bcab3ecbbb59744385265ea9d53fdc0,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6997936448396007460, guid: 5bcab3ecbbb59744385265ea9d53fdc0,
         type: 3}
       propertyPath: MaxSpeed
