@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 6121963497885629000}
   - component: {fileID: 6121963497885629007}
   m_Layer: 0
-  m_Name: pickup-hammer-1
+  m_Name: pickup-tool-1
   m_TagString: pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7dabb4666d764bb1aeb00cf112e534d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: tools
+  itemName: tool
 --- !u!65 &6121963497885629007
 BoxCollider:
   m_ObjectHideFlags: 0

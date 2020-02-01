@@ -605,6 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   woodSprite: {fileID: 21300000, guid: ed9388187aa3146ecbf3ccdb8f7fd5ab, type: 3}
   stoneSprite: {fileID: 21300000, guid: 2577c66fb83da47aab85f6bb843446a1, type: 3}
+  toolSprite: {fileID: 0}
   player: {fileID: 482493171}
   ownSlot: 0
 --- !u!114 &1332870056
@@ -837,6 +838,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6121963497885629000, guid: 4709eb73b1115475b9657f633d510f6f,
+        type: 3}
+      propertyPath: itemName
+      value: tool
+      objectReference: {fileID: 0}
     - target: {fileID: 6121963497885629001, guid: 4709eb73b1115475b9657f633d510f6f,
         type: 3}
       propertyPath: m_LocalPosition.x
