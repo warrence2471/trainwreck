@@ -77,7 +77,13 @@ public class GameTrain : MonoBehaviour
             }
             else
             {
-                transform.position = preceding.transform.position - CWagonDistance * preceding.transform.forward;
+                var newPosition = preceding.transform.position - CWagonDistance * preceding.transform.forward;
+                var currentDistance = Vector3.Distance(transform.position, preceding.transform.position);
+                var newDistance = Vector3.Distance(newPosition, preceding.transform.position);
+                if (currentDistance > newDistance)
+                {
+                    transform.position = newPosition;
+                }
             }
         }
     }
@@ -120,19 +126,19 @@ public class GameTrain : MonoBehaviour
 
     private void StartTrain()
     {
-        Debug.Log("Start driving");
+        Debug.Log($"{name} starts driving");
         isDriving = true;
     }
 
     private void StopTrain()
     {
-        Debug.Log("Stop driving");
+        Debug.Log($"{name} stops driving");
         isDriving = false;
     }
 
     private void StartTurning(Collider other)
     {
-        Debug.Log("Start turning");
+        Debug.Log($"{name} starts turning");
         IsTurning = true;
         turn = other;
         currentTurnAngle = 0;
@@ -152,7 +158,7 @@ public class GameTrain : MonoBehaviour
 
     private void StopTurning()
     {
-        Debug.Log("Stop turning");
+        Debug.Log($"{name} stops turning");
         IsTurning = false;
     }
 }
