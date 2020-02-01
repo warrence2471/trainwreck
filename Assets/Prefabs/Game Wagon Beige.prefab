@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1198168858533350015}
   - component: {fileID: -5470126468189855952}
   m_Layer: 0
-  m_Name: Game Wagon 1
+  m_Name: Game Wagon Beige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 1.5
+  makeSmoke: 0
   smoke: {fileID: 8030706440422543433, guid: 61273674cb15b734582ea597884f8b3d, type: 3}
   smokeAge: 0.2
   acceleration: 0.1

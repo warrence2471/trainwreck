@@ -16,7 +16,10 @@ public class smoke : MonoBehaviour
     void Update()
     {
         age += Time.deltaTime;
-        transform.position += new Vector3(0, 0, Time.deltaTime / 2);
+
+        transform.position += new Vector3(0, Time.deltaTime / 3, 0);
+        transform.localScale += new Vector3(Time.deltaTime / 3, Time.deltaTime / 3, Time.deltaTime / 3); ;
+
         if (age > 2.0f) {
           Destroy(this.gameObject);
         }

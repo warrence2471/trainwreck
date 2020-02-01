@@ -9,7 +9,7 @@ public class trainMainMenuBehaviour : MonoBehaviour
     [SerializeField]
     public GameObject smoke;
     private float age = 0.0f;
-    private float smokeAge = 0.2f;
+    private float smokeAge = 0.1f;
     private float currentSpeed = 0;
     public float maxSpeed = 100;
     public float acceleration = 1;
@@ -24,16 +24,16 @@ public class trainMainMenuBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isDriving)
+        if (isDriving)
         {
           age += Time.deltaTime;
-          if (age > smokeAge) {
+          if (age > smokeAge / (currentSpeed * 20 + 0.01f)) {
             age = 0;
-            Instantiate(smoke, new Vector3(transform.position.x+1, transform.position.y+1, transform.position.z), Quaternion.identity);
+            Instantiate(smoke, new Vector3(transform.position.x+.6f, transform.position.y+1.2f, transform.position.z-.3f), Quaternion.identity);
           }
         }
 
-        if(isDriving && currentSpeed < maxSpeed)
+        if (isDriving && currentSpeed < maxSpeed)
         {
             currentSpeed += acceleration * Time.deltaTime;
         }
