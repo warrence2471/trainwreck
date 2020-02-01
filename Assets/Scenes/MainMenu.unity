@@ -1394,7 +1394,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 1be97d3cc7849ed45846ad1fe654d510,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1be97d3cc7849ed45846ad1fe654d510,
         type: 3}
@@ -1666,7 +1666,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b394570f879229f4d8622502734d1488,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b394570f879229f4d8622502734d1488,
         type: 3}
@@ -1818,7 +1818,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Toogle fe/male
+  m_Text: Toogle Character
 --- !u!222 &1213366756
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2243,17 +2243,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800072742}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0.382686, w: 0.9238785}
+  m_LocalPosition: {x: 0, y: 0, z: 1.467}
   m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_Children:
   - {fileID: 1213366754}
   m_Father: {fileID: 702721022}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45.000004}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2.1, y: 0.3}
+  m_AnchoredPosition: {x: -1.21, y: -0.34}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800072744
