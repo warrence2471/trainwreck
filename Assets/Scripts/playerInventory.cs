@@ -29,6 +29,11 @@ public class playerInventory : MonoBehaviour
         return false;
     }
 
+    public string getItemInSlot(int slot)
+    {
+        return items[slot];
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
