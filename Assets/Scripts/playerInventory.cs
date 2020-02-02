@@ -79,8 +79,23 @@ public class playerInventory : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        Debug.DrawRay(transform.position, fwd * 2, Color.green);
-        if (Physics.Raycast(transform.position, fwd, out hit, 2))
+        Vector3 fwd2 = transform.TransformDirection(Vector3.forward + new Vector3(.25f, 0, 0));
+        Vector3 fwd3 = transform.TransformDirection(Vector3.forward + new Vector3(-.25f, 0, 0));
+        Vector3 fwd4 = transform.TransformDirection(Vector3.forward + new Vector3(.5f, 0, 0));
+        Vector3 fwd5 = transform.TransformDirection(Vector3.forward + new Vector3(-.5f, 0, 0));
+
+        Debug.DrawRay(transform.position, fwd, Color.red, 5);
+        Debug.DrawRay(transform.position, fwd2, Color.red, 5);
+        Debug.DrawRay(transform.position, fwd3, Color.red, 5);
+        Debug.DrawRay(transform.position, fwd4, Color.red, 5);
+        Debug.DrawRay(transform.position, fwd5, Color.red, 5);
+
+
+        if (Physics.Raycast(transform.position, fwd, out hit, 2)
+            || Physics.Raycast(transform.position, fwd2, out hit, 2)
+            || Physics.Raycast(transform.position, fwd3, out hit, 2)
+            || Physics.Raycast(transform.position, fwd4, out hit, 2)
+            || Physics.Raycast(transform.position, fwd5, out hit, 2))
         {
             return hit.collider.gameObject;
         }

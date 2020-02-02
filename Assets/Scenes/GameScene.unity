@@ -195,6 +195,7 @@ MonoBehaviour:
   - {fileID: -5470126468189855952, guid: 75e4e81dddf2a9249a1147f8f9058261, type: 3}
   - {fileID: -5470126468189855952, guid: db4fd09a606713c47a4e7d7a9a0399d6, type: 3}
   finish: {fileID: 5879257921396132813, guid: 76a829fbd023ff046b391ea0df6576b1, type: 3}
+  size: 14
 --- !u!1001 &119115070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -684,7 +685,7 @@ Light:
     m_CustomResolution: -1
     m_Strength: 0.75
     m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_NormalBias: 0
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -813,13 +814,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 3, z: -2}
+  m_LocalRotation: {x: 0.51388454, y: -0, z: -0, w: 0.8578594}
+  m_LocalPosition: {x: 1.97, y: 3.48, z: 0.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 61.846004, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,7 +836,7 @@ MonoBehaviour:
   objectToFollow: {fileID: 838116218}
   speed_x: 3
   speed_z: 7
-  offset: 5
+  offset: 2
 --- !u!1001 &998438409
 PrefabInstance:
   m_ObjectHideFlags: 0
