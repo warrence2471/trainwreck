@@ -29,5 +29,8 @@ public enum MapItemType
 {
     Track,
     Turn,
-    Broken
+    Broken,
+    Cow,
+    Deco,
+    Nothing
 }

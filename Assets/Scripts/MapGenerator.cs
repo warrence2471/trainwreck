@@ -23,21 +23,31 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public int maxBrokenTrails = 5;
     [SerializeField]
+    public float brokenTrailChance = 0.05f;
+    [SerializeField]
+    public float cowChance = 0.02f;
+    [SerializeField]
+    public int maxCows = 5;
+    [SerializeField]
     public int initialUnbrokenTrails = 10;
+    [SerializeField]
+    public float decoChance = 0.05f;
 
     private const int CTurn = 90;
-    private int brokenTrailsSoFar = 0;
 
     private void Awake()
     {
         var layout = MakeMapLayout();
+        AddNonRails(layout);
         BuildMap(layout);
     }
 
-    private IEnumerable<MapItem> MakeMapLayout()
+    private List<MapItem> MakeMapLayout()
     {
         var layout = new List<MapItem>();
         InitRandom();
+
+        int brokenTrailsSoFar = 0;
 
         var loc = new Vector2Int(-size, 0);
         var dir = Vector2Int.right;
@@ -61,10 +71,13 @@ public class MapGenerator : MonoBehaviour
                     break;
                 }
 
-                if (layout.Count > initialUnbrokenTrails && brokenTrailsSoFar < maxBrokenTrails && Random.value < 0.05) {
+                if (layout.Count > initialUnbrokenTrails && brokenTrailsSoFar < maxBrokenTrails && Random.value < brokenTrailChance)
+                {
                     layout.Add(CreateBroken(loc, dir));
                     brokenTrailsSoFar += 1;
-                } else {
+                }
+                else
+                {
                     layout.Add(CreateTrack(loc, dir));
                 }
                 loc += dir;
@@ -114,6 +127,48 @@ public class MapGenerator : MonoBehaviour
         //}
     }
 
+    private void AddNonRails(List<MapItem> layout)
+    {
+        // Init the array
+        MapItemType[,] map = new MapItemType[2 * size + 1, 2 * size + 1];
+        for (int i = 0; i < 2 * size + 1; i++)
+        {
+            for (int j = 0; j < 2 * size + 1; j++)
+            {
+                map[i, j] = MapItemType.Nothing;
+            }
+        }
+
+        // Collect the rail locations
+        foreach (var item in layout)
+        {
+            map[Mathf.RoundToInt(item.Location.x) + size, Mathf.RoundToInt(item.Location.z) + size] = item.Type;
+        }
+
+        // Add cows to layout
+        int cowsSoFar = 0;
+        for (int i = 0; i < layout.Count; i++)
+        {
+            if (i > initialUnbrokenTrails && cowsSoFar < maxCows && Random.value < cowChance)
+            {
+                var loc = layout[i].Location;
+                layout.Add(CreateCow(new Vector2Int(Mathf.RoundToInt(loc.x), Mathf.RoundToInt(loc.z))));
+                cowsSoFar += 1;
+            }
+        }
+
+        for (int i = 0; i < 2 * size + 1; i++)
+        {
+            for (int j = 0; j < 2 * size + 1; j++)
+            {
+                if (map[i, j] == MapItemType.Nothing && Random.value < decoChance)
+                {
+                    layout.Add(CreateDeco(new Vector2Int(i - size, j - size)));
+                }
+            }
+        }
+    }
+
     private void BuildMap(IEnumerable<MapItem> layout)
     {
         foreach (var item in layout)
@@ -132,6 +187,10 @@ public class MapGenerator : MonoBehaviour
                 return railturn;
             case MapItemType.Broken:
                 return railtrackBroken;
+            case MapItemType.Cow:
+                return cow;
+            case MapItemType.Deco:
+                return decos[Random.Range(0, decos.Length)];
             default:
                 return null;
         }
@@ -218,5 +277,15 @@ public class MapGenerator : MonoBehaviour
     private MapItem CreateBroken(Vector2Int loc, Vector2Int dir)
     {
         return new MapItem(MapItemType.Broken, loc.x, loc.y, GetRotation(dir), dir);
+    }
+
+    private MapItem CreateCow(Vector2Int loc)
+    {
+        return new MapItem(MapItemType.Cow, loc.x, loc.y, Random.Range(0, 359), Vector2Int.zero);
+    }
+
+    private MapItem CreateDeco(Vector2Int loc)
+    {
+        return new MapItem(MapItemType.Deco, loc.x, loc.y, Random.Range(0, 359), Vector2Int.zero);
     }
 }
