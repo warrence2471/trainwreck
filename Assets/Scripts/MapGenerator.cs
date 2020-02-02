@@ -32,14 +32,29 @@ public class MapGenerator : MonoBehaviour
     public int initialUnbrokenTrails = 10;
     [SerializeField]
     public float decoChance = 0.05f;
+    [SerializeField]
+    public int finishOffset = 3;
 
     private const int CTurn = 90;
 
     private void Awake()
     {
         var layout = MakeMapLayout();
+        //var layout = MakeStupidMap();
         AddNonRails(layout);
         BuildMap(layout);
+    }
+
+    private List<MapItem> MakeStupidMap()
+    {
+        var layout = new List<MapItem>();
+        for (int i = 0; i < size; i++)
+        {
+            layout.Add(CreateTrack(new Vector2Int(-size + i, 0), Vector2Int.right));
+        }
+        var loc = layout[layout.Count - finishOffset].Location;
+        layout.Add(CreateFinish(new Vector2Int(Mathf.RoundToInt(loc.x), Mathf.RoundToInt(loc.z)), Vector2Int.right));
+        return layout;
     }
 
     private List<MapItem> MakeMapLayout()
@@ -114,17 +129,10 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        return layout;
+        var locOff = layout[layout.Count - finishOffset].Location;
+        layout.Add(CreateFinish(new Vector2Int(Mathf.RoundToInt(locOff.x), Mathf.RoundToInt(locOff.z)), dir));
 
-        // TODO Spawning the train creates problems with the wagon links, no idea what's going on...
-        //for (int i = 0; i < train.Length; i++)
-        //{
-        //    var follower = Instantiate(train[i], new Vector3(-2.5f - i * GameTrain.CWagonDistance, 0, 5), Quaternion.Euler(0, 90, 0));
-        //    if (i > 0)
-        //    {
-        //        //follower.GetComponent<GameTrain>().preceding = train[i - 1];
-        //    }
-        //}
+        return layout;
     }
 
     private void AddNonRails(List<MapItem> layout)
@@ -191,6 +199,8 @@ public class MapGenerator : MonoBehaviour
                 return cow;
             case MapItemType.Deco:
                 return decos[Random.Range(0, decos.Length)];
+            case MapItemType.Finish:
+                return finish;
             default:
                 return null;
         }
@@ -287,5 +297,10 @@ public class MapGenerator : MonoBehaviour
     private MapItem CreateDeco(Vector2Int loc)
     {
         return new MapItem(MapItemType.Deco, loc.x, loc.y, Random.Range(0, 359), Vector2Int.zero);
+    }
+
+    private MapItem CreateFinish(Vector2Int loc, Vector2Int dir)
+    {
+        return new MapItem(MapItemType.Finish, loc.x, loc.y, GetRotation(dir), dir);
     }
 }
