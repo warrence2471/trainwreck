@@ -46,7 +46,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.65, y: 1.2, z: 2.05}
-  m_Center: {x: 0, y: 0.6, z: -0.15}
+  m_Center: {x: 0, y: 0.667, z: -0.15}
 --- !u!54 &1198168858533350015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -76,9 +76,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 1.5
-  makeSmoke: 0
-  smoke: {fileID: 8030706440422543433, guid: 61273674cb15b734582ea597884f8b3d, type: 3}
-  smokeAge: 0.2
   acceleration: 0.1
   negativeAcceleration: 0.3
   preceding: {fileID: 0}
