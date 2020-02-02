@@ -29,6 +29,8 @@ public class GameTrain : MonoBehaviour
 
     public bool IsTurning { get; set; } = false;
 
+    bool iNeedToTurn = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,11 +58,12 @@ public class GameTrain : MonoBehaviour
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
         if (!IsTurning)
         {
-            if (preceding == null || preceding.IsTurning)
+            if (preceding == null || preceding.IsTurning || iNeedToTurn)
             {
+                iNeedToTurn = true;
                 transform.position += transform.forward * currentSpeed / CUpdatesPerSecond;
             }
-            else
+            else if (!iNeedToTurn)
             {
                 var newPosition = preceding.transform.position - CWagonDistance * preceding.transform.forward;
                 var currentDistance = Vector3.Distance(transform.position, preceding.transform.position);
@@ -129,11 +132,12 @@ public class GameTrain : MonoBehaviour
     {
         Debug.Log($"{name} starts turning");
         IsTurning = true;
+        iNeedToTurn = false;
         turn = other;
         currentTurnAngle = 0;
 
         turnAnchor = turn.transform.position + (turn.transform.forward + turn.transform.right) * CTurnExtent;
-        turnIncrement = Mathf.Rad2Deg / CUpdatesPerSecond / turn.bounds.extents.x * 3; // TODO *3?
+        turnIncrement = Mathf.Rad2Deg / CUpdatesPerSecond / turn.bounds.extents.x; // TODO *3?
         var turnVector = turn.transform.forward + turn.transform.right + transform.forward;
         if (Vector3.Dot(turnVector, transform.right) < 0)
         {
