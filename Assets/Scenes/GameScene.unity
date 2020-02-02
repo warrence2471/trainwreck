@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17615715, g: 0.220465, b: 0.30279213, a: 1}
+  m_IndirectSpecularColor: {r: 0.17615695, g: 0.2204646, b: 0.3027915, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -737,6 +737,7 @@ MonoBehaviour:
   items:
   - 
   - 
+  uiCanvas: {fileID: 1698352728}
 --- !u!1 &853772397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 1be97d3cc7849ed45846ad1fe654d510,

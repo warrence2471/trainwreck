@@ -44,11 +44,16 @@ public class playerInventory : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
+        {
             Repair(GetTarget());
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            Pickup(GetTarget(), 0);
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
             Pickup(GetTarget(), 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Pickup(GetTarget(), 0);
+            Debug.Log("pressed Q");
+        }
     }
 
     void Pickup(GameObject item, int slot)
