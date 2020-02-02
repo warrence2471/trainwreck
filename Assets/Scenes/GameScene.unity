@@ -157,7 +157,7 @@ MonoBehaviour:
   - {fileID: 6121963497885629006, guid: 4709eb73b1115475b9657f633d510f6f, type: 3}
   - {fileID: 4895709656378661252, guid: 7b52c771daff74962a0d452769d8b23e, type: 3}
   numberOfObjectsToGenerate: 40
-  groundToSpawn: {fileID: 164796369}
+  groundToSpawn: {fileID: 283033311}
 --- !u!4 &43203545
 Transform:
   m_ObjectHideFlags: 0
@@ -260,6 +260,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2953783596338653302, guid: 41d094cfc1b4d02469f4a55f94d61e84,
     type: 3}
   m_PrefabInstance: {fileID: 119115070}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &283033311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8346078130603750383, guid: 819b3900f6c7c494b9c7d246882cc971,
+    type: 3}
+  m_PrefabInstance: {fileID: 8346078130345112255}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &318884284 stripped
 GameObject:
