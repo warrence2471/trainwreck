@@ -61,13 +61,15 @@ public class playerInventory : MonoBehaviour
         }
         else if (targetItem.tag == "repair")
         {
-            string neededItem = targetItem.GetComponent<repairController>().itemName;
+            repairController repairC = targetItem.GetComponent<repairController>();
+            string neededItem = repairC.itemName;
             Debug.Log("Trying to repair " + targetItem.name + " now - need " + neededItem + " to do so.");
 
             if (hasItem(neededItem)) {
                 Debug.Log("Item found!");
                 useItem(neededItem);
-                Destroy(targetItem.gameObject);
+                repairC.Trigger();
+                // Destroy(targetItem.gameObject);
             } else {
                 Debug.Log("Do not have the item");
             }
