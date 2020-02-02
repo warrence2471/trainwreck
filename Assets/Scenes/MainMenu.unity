@@ -5530,8 +5530,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5568,7 +5568,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -1577.5275, w: -143.58032}
+  m_margin: {x: 0, y: 0, z: -1577.5275, w: -196.73737}
   m_textInfo:
     textComponent: {fileID: 1764277511}
     characterCount: 416
@@ -5576,7 +5576,7 @@ MonoBehaviour:
     spaceCount: 87
     wordCount: 87
     linkCount: 0
-    lineCount: 6
+    lineCount: 7
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
