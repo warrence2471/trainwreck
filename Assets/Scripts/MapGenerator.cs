@@ -17,6 +17,13 @@ public class MapGenerator : MonoBehaviour
 
     private void Awake()
     {
+        // Those are the starting tracks for the train in the game scene
+        Instantiate(railtrack, new Vector3(-14, 0, 0), Quaternion.identity);
+        Instantiate(railtrack, new Vector3(-13, 0, 0), Quaternion.identity);
+        Instantiate(railtrack, new Vector3(-12, 0, 0), Quaternion.identity);
+
+
+
         Instantiate(railtrack, new Vector3(-5, 0, 5), Quaternion.identity);
         Instantiate(railtrack, new Vector3(-4, 0, 5), Quaternion.identity);
         Instantiate(railtrack, new Vector3(-3, 0, 5), Quaternion.identity);
@@ -37,13 +44,14 @@ public class MapGenerator : MonoBehaviour
 
         Instantiate(finish, new Vector3(2, 0, 0), Quaternion.identity);
 
-        for (int i = 0; i < train.Length; i++)
-        {
-            var follower = Instantiate(train[i], new Vector3(-2.5f - i * GameTrain.CWagonDistance, 0, 5), Quaternion.Euler(0, 90, 0));
-            if (i > 0)
-            {
-                //follower.GetComponent<GameTrain>().preceding = train[i - 1];
-            }
-        }
+        // TODO Spawning the train creates problems with the wagon links, no idea what's going on...
+        //for (int i = 0; i < train.Length; i++)
+        //{
+        //    var follower = Instantiate(train[i], new Vector3(-2.5f - i * GameTrain.CWagonDistance, 0, 5), Quaternion.Euler(0, 90, 0));
+        //    if (i > 0)
+        //    {
+        //        //follower.GetComponent<GameTrain>().preceding = train[i - 1];
+        //    }
+        //}
     }
 }
