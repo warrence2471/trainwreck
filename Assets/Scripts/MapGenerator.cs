@@ -11,7 +11,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public GameObject railtrackBroken;
     [SerializeField]
-    public GameObject[] train;
+    public GameTrain[] train;
     [SerializeField]
     public GameObject finish;
 
@@ -39,7 +39,11 @@ public class MapGenerator : MonoBehaviour
 
         for (int i = 0; i < train.Length; i++)
         {
-            Instantiate(train[i], new Vector3(-2.5f - i * GameTrain.CWagonDistance, 0, 5), Quaternion.Euler(0, 90, 0));
+            var follower = Instantiate(train[i], new Vector3(-2.5f - i * GameTrain.CWagonDistance, 0, 5), Quaternion.Euler(0, 90, 0));
+            if (i > 0)
+            {
+                //follower.GetComponent<GameTrain>().preceding = train[i - 1];
+            }
         }
     }
 }

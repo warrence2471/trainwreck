@@ -192,10 +192,10 @@ MonoBehaviour:
   railtrackBroken: {fileID: 6410140193750146806, guid: 27c6b70c99be6fcb69febf1a59f2b7b7,
     type: 3}
   train:
-  - {fileID: 7168933694545467421, guid: 5bcab3ecbbb59744385265ea9d53fdc0, type: 3}
-  - {fileID: 3721050786812299566, guid: db4fd09a606713c47a4e7d7a9a0399d6, type: 3}
-  - {fileID: 3721050786812299566, guid: 75e4e81dddf2a9249a1147f8f9058261, type: 3}
-  - {fileID: 3721050786812299566, guid: db4fd09a606713c47a4e7d7a9a0399d6, type: 3}
+  - {fileID: 6997936448396007460, guid: 5bcab3ecbbb59744385265ea9d53fdc0, type: 3}
+  - {fileID: -5470126468189855952, guid: db4fd09a606713c47a4e7d7a9a0399d6, type: 3}
+  - {fileID: -5470126468189855952, guid: 75e4e81dddf2a9249a1147f8f9058261, type: 3}
+  - {fileID: -5470126468189855952, guid: db4fd09a606713c47a4e7d7a9a0399d6, type: 3}
   finish: {fileID: 5879257921396132813, guid: 76a829fbd023ff046b391ea0df6576b1, type: 3}
 --- !u!1001 &119115070
 PrefabInstance:
