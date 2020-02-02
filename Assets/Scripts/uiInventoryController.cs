@@ -31,16 +31,17 @@ public class uiInventoryController : MonoBehaviour
             var item = inventory.getItemInSlot(i);
             var childImage = transform.GetChild(ui_offset + i);
 
-            if (item == "wood")
-                childImage.GetComponent<Image>().sprite = woodSprite;
-            else if (item == "stone")
-                childImage.GetComponent<Image>().sprite = stoneSprite;
-            else if (item == "cowspray")
-                childImage.GetComponent<Image>().sprite = cowSpraySprite;
-            else if (item == "tool")
-                childImage.GetComponent<Image>().sprite = toolSprite;
-            else
-                childImage.GetComponent<Image>().sprite = null;
+            childImage.GetComponent<Image>().sprite = GetSpriteForItem(item);
+        }
+    }
+
+    Sprite GetSpriteForItem(string item) {
+        switch(item) {
+            case "wood": return woodSprite;
+            case "stone": return stoneSprite;
+            case "cowspray": return cowSpraySprite;
+            case "tool": return toolSprite;
+            default: return null;
         }
     }
 }
