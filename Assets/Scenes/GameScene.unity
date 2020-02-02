@@ -189,6 +189,8 @@ MonoBehaviour:
     type: 3}
   railturn: {fileID: 4674156214003199353, guid: d9965b35c18d67347a1c850e620f6c38,
     type: 3}
+  railtrackBroken: {fileID: 6410140193750146806, guid: 27c6b70c99be6fcb69febf1a59f2b7b7,
+    type: 3}
   train:
   - {fileID: 7168933694545467421, guid: 5bcab3ecbbb59744385265ea9d53fdc0, type: 3}
   - {fileID: 3721050786812299566, guid: db4fd09a606713c47a4e7d7a9a0399d6, type: 3}

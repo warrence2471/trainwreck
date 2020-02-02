@@ -9,6 +9,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public GameObject railturn;
     [SerializeField]
+    public GameObject railtrackBroken;
+    [SerializeField]
     public GameObject[] train;
     [SerializeField]
     public GameObject finish;
