@@ -77,7 +77,7 @@ public class GameTrain : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (IsCollidingBrokenRail(other)) {
+        if (IsCollidingWithSomethingThatShouldStopTheTrain(other)) {
             currentSpeed = 0;
         }
         if (IsTurning)
@@ -109,9 +109,9 @@ public class GameTrain : MonoBehaviour
         }
     }
 
-    private bool IsCollidingBrokenRail(Collider other)
+    private bool IsCollidingWithSomethingThatShouldStopTheTrain(Collider other)
     {
-        return other.gameObject.name.Contains("Broken");
+        return other.gameObject.name.Contains("Broken") || other.gameObject.name.Contains("Cow");
     }
 
     private bool IsCollidingRailturn(Collider other)
