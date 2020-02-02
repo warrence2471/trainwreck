@@ -156,9 +156,8 @@ MonoBehaviour:
   - {fileID: 5776656167115667987, guid: ede436c2d3cc544798bccec4ecc0c336, type: 3}
   - {fileID: 6121963497885629006, guid: 4709eb73b1115475b9657f633d510f6f, type: 3}
   - {fileID: 4895709656378661252, guid: 7b52c771daff74962a0d452769d8b23e, type: 3}
-  numberOfObjectsToGenerate: 60
-  maxLeft: 20
-  maxTop: 20
+  numberOfObjectsToGenerate: 40
+  groundToSpawn: {fileID: 164796369}
 --- !u!4 &43203545
 Transform:
   m_ObjectHideFlags: 0
