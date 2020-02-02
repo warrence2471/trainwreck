@@ -25,7 +25,7 @@ public class GameTrain : MonoBehaviour
 
     private const float CUpdatesPerSecond = 120;
     private const float CTurnExtent = 0.5f;
-    private const float CWagonDistance = 0.75f;
+    public const float CWagonDistance = 0.75f;
 
     public bool IsTurning { get; set; } = false;
 

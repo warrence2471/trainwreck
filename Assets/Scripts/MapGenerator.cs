@@ -19,10 +19,12 @@ public class MapGenerator : MonoBehaviour
         Instantiate(railtrack, new Vector3(-4, 0, 5), Quaternion.identity);
         Instantiate(railtrack, new Vector3(-3, 0, 5), Quaternion.identity);
         Instantiate(railtrack, new Vector3(-2, 0, 5), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-1, 0, 4), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-1, 0, 3), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-1, 0, 2), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-1, 0, 1), Quaternion.identity);
+        Instantiate(railturn, new Vector3(-1, 0, 5), Quaternion.Euler(0, 180, 0));
+        Instantiate(railtrack, new Vector3(-1, 0, 4), Quaternion.Euler(0, 90, 0));
+        Instantiate(railtrack, new Vector3(-1, 0, 3), Quaternion.Euler(0, 90, 0));
+        Instantiate(railtrack, new Vector3(-1, 0, 2), Quaternion.Euler(0, 90, 0));
+        Instantiate(railtrack, new Vector3(-1, 0, 1), Quaternion.Euler(0, 90, 0));
+        Instantiate(railturn, new Vector3(-1, 0, 0), Quaternion.identity);
         Instantiate(railtrack, new Vector3(0, 0, 0), Quaternion.identity);
         Instantiate(railtrack, new Vector3(1, 0, 0), Quaternion.identity);
         Instantiate(railtrack, new Vector3(2, 0, 0), Quaternion.identity);
@@ -33,9 +35,9 @@ public class MapGenerator : MonoBehaviour
 
         Instantiate(finish, new Vector3(2, 0, 0), Quaternion.identity);
 
-        foreach (var obj in train)
+        for (int i = 0; i < train.Length; i++)
         {
-            Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate(train[i], new Vector3(-2.5f - i * GameTrain.CWagonDistance, 0, 5), Quaternion.Euler(0, 90, 0));
         }
     }
 }
