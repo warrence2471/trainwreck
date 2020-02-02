@@ -58,7 +58,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65901310d30a1ac7390ed6bc80479150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: wood
+  itemsNeededToRepair:
+  - wood
+  - tool
   replaceWith: {fileID: 0}
 --- !u!1001 &6559298361415035669
 PrefabInstance:

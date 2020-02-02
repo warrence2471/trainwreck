@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class repairController : MonoBehaviour
 {
-    public string itemName;
+    public List<string> itemsNeededToRepair = new List<string>(1);
     public GameObject replaceWith;
 
     public void Trigger() {
