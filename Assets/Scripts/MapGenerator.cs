@@ -14,35 +14,78 @@ public class MapGenerator : MonoBehaviour
     public GameTrain[] train;
     [SerializeField]
     public GameObject finish;
+    [SerializeField]
+    public int size = 14;
+
+    private const int CTurn = 90;
 
     private void Awake()
     {
-        // Those are the starting tracks for the train in the game scene
-        Instantiate(railtrack, new Vector3(-14, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-13, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-12, 0, 0), Quaternion.identity);
+        var layout = MakeMapLayout();
+        BuildMap(layout);
+    }
 
+    private IEnumerable<MapItem> MakeMapLayout()
+    {
+        var layout = new List<MapItem>();
+        //Random.InitState(42);
 
+        var loc = new Vector2Int(-size, 0);
+        var dir = Vector2Int.right;
+        var edge = size - 1;
+        var stop = false;
 
-        Instantiate(railtrack, new Vector3(-5, 0, 5), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-4, 0, 5), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-3, 0, 5), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(-2, 0, 5), Quaternion.identity);
-        Instantiate(railturn, new Vector3(-1, 0, 5), Quaternion.Euler(0, 180, 0));
-        Instantiate(railtrack, new Vector3(-1, 0, 4), Quaternion.Euler(0, 90, 0));
-        Instantiate(railtrack, new Vector3(-1, 0, 3), Quaternion.Euler(0, 90, 0));
-        Instantiate(railtrack, new Vector3(-1, 0, 2), Quaternion.Euler(0, 90, 0));
-        Instantiate(railtrack, new Vector3(-1, 0, 1), Quaternion.Euler(0, 90, 0));
-        Instantiate(railturn, new Vector3(-1, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(0, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(1, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(2, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(3, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(4, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(5, 0, 0), Quaternion.identity);
-        Instantiate(railtrack, new Vector3(6, 0, 0), Quaternion.identity);
+        layout.Add(CreateTrack(loc, GetRotation(dir)));
+        loc += dir;
+        layout.Add(CreateTrack(loc, GetRotation(dir)));
+        loc += dir;
 
-        Instantiate(finish, new Vector3(2, 0, 0), Quaternion.identity);
+        while (!stop)
+        {
+            for (int i = 0; i < Random.Range(1, 12); i++)
+            {
+                // Stop and backtrack if placement invalid 
+                if (!CheckValidPlacement(layout, loc))
+                {
+                    stop = !Backtrack(layout, ref loc, ref dir, 2);
+                    break;
+                }
+
+                layout.Add(CreateTrack(loc, GetRotation(dir)));
+                loc += dir;
+                
+                // Stop if we're about to hit the edge
+                if (loc.x > edge || loc.x < -edge || loc.y > edge || loc.y < -edge)
+                {
+                    break;
+                }
+            }
+
+            if (stop)
+            {
+                break;
+            }
+
+            //if (!CheckValidPlacement(layout, loc))
+            //{
+            //    stop = !Backtrack(layout, ref loc, ref dir, 2);
+            //    break;
+            //}
+
+            if (Random.value < 0.5)
+            {
+                dir.Set(dir.y, -dir.x);
+                layout.Add(CreateTurn(loc, GetRotation(dir) + CTurn));
+            }
+            else
+            {
+                dir.Set(-dir.y, dir.x);
+                layout.Add(CreateTurn(loc, GetRotation(dir)));
+            }
+            loc += dir;
+        }
+
+        return layout;
 
         // TODO Spawning the train creates problems with the wagon links, no idea what's going on...
         //for (int i = 0; i < train.Length; i++)
@@ -53,5 +96,80 @@ public class MapGenerator : MonoBehaviour
         //        //follower.GetComponent<GameTrain>().preceding = train[i - 1];
         //    }
         //}
+    }
+
+    private void BuildMap(IEnumerable<MapItem> layout)
+    {
+        foreach (var item in layout)
+        {
+            Instantiate(GetGameObject(item.Type), item.Location, item.Rotation);
+        }
+    }
+
+    private GameObject GetGameObject(MapItemType type)
+    {
+        switch (type)   
+        {
+            case MapItemType.Track:
+                return railtrack;
+            case MapItemType.Turn:
+                return railturn;
+            case MapItemType.Broken:
+                return railtrackBroken;
+            default:
+                return null;
+        }
+    }
+
+    private int GetRotation(Vector2Int direction)
+    {
+        return Mathf.RoundToInt(Vector2.SignedAngle(direction, Vector2Int.right) / CTurn) * CTurn;
+    }
+
+    private bool CheckValidPlacement(List<MapItem> layout, Vector2Int loc)
+    {
+        for (int k = 0; k < layout.Count; k++)
+        {
+            // Stop if a straight is hitting...
+            if ((layout[k].Location.x == loc.x && layout[k].Location.z == loc.y)
+                // ... the first 3 items or a turn
+                && (k < 3 || layout[k].Type == MapItemType.Turn))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private bool Backtrack(List<MapItem> layout, ref Vector2Int loc, ref Vector2Int dir, int steps)
+    {
+        for (int i = 1; i < steps + 1; i++)
+        {
+            if (layout[layout.Count - 1].Type == MapItemType.Track || layout[layout.Count - 1].Type == MapItemType.Broken)
+            {
+                layout.RemoveAt(layout.Count - 1);
+                loc -= dir;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+        
+    private MapItem CreateTrack(Vector2Int loc, int rot)
+    {
+        return new MapItem(MapItemType.Track, loc.x, loc.y, rot);
+    }
+
+    private MapItem CreateTurn(Vector2Int loc, int rot)
+    {
+        return new MapItem(MapItemType.Turn, loc.x, loc.y, rot);
+    }
+
+    private MapItem CreateBroken(Vector2Int loc, int rot)
+    {
+        return new MapItem(MapItemType.Broken, loc.x, loc.y, rot);
     }
 }
