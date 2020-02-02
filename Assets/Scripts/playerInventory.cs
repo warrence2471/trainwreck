@@ -5,13 +5,6 @@ using UnityEngine;
 public class playerInventory : MonoBehaviour
 {
     public List<string> items = new List<string>(2);
-    public GameObject uiCanvas;
-    private uiInventoryController uiInventory;
-
-    void Awake() {
-        uiInventory = uiCanvas.GetComponent<uiInventoryController>();
-        Debug.Log(uiInventory);
-    }
 
     private bool hasItem(string itemName)
     {
