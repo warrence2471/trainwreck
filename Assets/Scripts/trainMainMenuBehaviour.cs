@@ -9,7 +9,7 @@ public class trainMainMenuBehaviour : MonoBehaviour
     [SerializeField]
     public GameObject smoke;
     private float age = 0.0f;
-    private float smokeAge = 0.2f;
+    private float smokeAge = 0.05f;
     private float currentSpeed = 0;
     public float maxSpeed = 100;
     public float acceleration = 1;
@@ -27,13 +27,16 @@ public class trainMainMenuBehaviour : MonoBehaviour
         if(isDriving)
         {
           age += Time.deltaTime;
-          if (age > smokeAge) {
+          if (age > smokeAge / (currentSpeed * 20 + 0.01f)) {
             age = 0;
-            Instantiate(smoke, new Vector3(transform.position.x+1, transform.position.y+1, transform.position.z), Quaternion.identity);
+            float xSpin = Random.Range(0, 360);
+            float ySpin = Random.Range(0, 360);
+            float zSpin = Random.Range(0, 360);
+            Instantiate(smoke, new Vector3(transform.position.x+.6f, transform.position.y+1.2f, transform.position.z-.3f), Quaternion.Euler(xSpin, ySpin, zSpin));
           }
         }
 
-        if(isDriving && currentSpeed < maxSpeed)
+        if (isDriving && currentSpeed < maxSpeed)
         {
             currentSpeed += acceleration * Time.deltaTime;
         }
@@ -52,7 +55,7 @@ public class trainMainMenuBehaviour : MonoBehaviour
 
         var newYposition = startYposition;
         if (currentSpeed == 0) {
-            newYposition = startYposition + (Mathf.Sin(Time.timeSinceLevelLoad * 20) + 1) / 40;
+            newYposition = startYposition + (Mathf.Sin(Time.timeSinceLevelLoad * 20) + 1) / 200;
         }
 
         var newXposition = transform.position.x + currentSpeed;
@@ -62,6 +65,10 @@ public class trainMainMenuBehaviour : MonoBehaviour
     public void startTrain()
     {
         this.isDriving = true;
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        foreach (AudioSource audioSource in audioSources) {
+            audioSource.Play();
+        }
     }
 
     public void stopTrain()

@@ -11,33 +11,40 @@ public class uiInventoryController : MonoBehaviour
     public Sprite toolSprite;
 
     public GameObject player;
-    public int ownSlot = 0;
-
     private playerInventory inventory;
 
+    private List<Image> inventorySlots = new List<Image>();
 
     void Awake()
     {
         inventory = player.GetComponent<playerInventory>();
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            var childImage = transform.GetChild(i);
+            Debug.Log(childImage + " " + childImage.name);
+            if (childImage.name.StartsWith("InventorySlot")) {
+                inventorySlots.Add(childImage.GetComponent<Image>());
+            }
+        }
     }
-
 
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < transform.childCount; i++)
+        for(int i = 0; i < inventorySlots.Count; i++)
         {
-            var item = inventory.getItemInSlot(i);
-            var childImage = transform.GetChild(i);
+            string item = inventory.getItemInSlot(i);
+            inventorySlots[i].sprite = GetSpriteForItem(item);
+        }
+    }
 
-            if (item == "wood")
-                childImage.GetComponent<Image>().sprite = woodSprite;
-            if (item == "stone")
-                childImage.GetComponent<Image>().sprite = stoneSprite;
-            if (item == "cowspray")
-                childImage.GetComponent<Image>().sprite = cowSpraySprite;
-            if (item == "tool")
-                childImage.GetComponent<Image>().sprite = toolSprite;
+    public Sprite GetSpriteForItem(string item) {
+        switch(item) {
+            case "wood": return woodSprite;
+            case "stone": return stoneSprite;
+            case "cowspray": return cowSpraySprite;
+            case "tool": return toolSprite;
+            default: return null;
         }
     }
 }

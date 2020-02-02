@@ -5,8 +5,6 @@ using UnityEngine;
 public class playerInventory : MonoBehaviour
 {
     public List<string> items = new List<string>(2);
-    public GameObject selectedPickup;
-
 
     private bool hasItem(string itemName)
     {
@@ -20,9 +18,10 @@ public class playerInventory : MonoBehaviour
 
     public bool useItem(string itemName)
     {
-        if(hasItem(itemName))
+        if (hasItem(itemName))
         {
-            items.Remove(itemName);
+            int index = items.IndexOf(itemName);
+            items[index] = null;
             return true;
         }
 
@@ -34,39 +33,54 @@ public class playerInventory : MonoBehaviour
         return items[slot];
     }
 
+    // Handle Key Inputs
     void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Repair(GetTarget());
+            Pickup(GetTarget(), 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Pickup(GetTarget(), 0);
+            Debug.Log("pressed Q");
+        }
+    }
+
+    void Pickup(GameObject item, int slot)
+    {
+        if (!item || item.tag != "pickup") return;
+        addItem(item.GetComponent<pickupController>().itemName, slot);
+        Destroy(item.gameObject);
+    }
+
+    void Repair(GameObject item)
+    {
+        if (!item || item.tag != "repair") return;
+        repairController repairC = item.GetComponent<repairController>();
+
+        List<string> neededItems = repairC.itemsNeededToRepair;
+        
+        foreach(string neededItem in neededItems) {
+            if (!hasItem(neededItem))
+                return;
+        }
+
+        neededItems.ForEach(i => useItem(i));
+        repairC.Trigger();
+    }
+
+    GameObject GetTarget()
     {
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         Debug.DrawRay(transform.position, fwd * 2, Color.green);
         if (Physics.Raycast(transform.position, fwd, out hit, 2))
         {
-            if (hit.collider.tag == "pickup")
-            {
-                this.selectedPickup = hit.collider.gameObject;
-            }
-            else
-            {
-                this.selectedPickup = null;
-            }
+            return hit.collider.gameObject;
         }
-
-
-        if (selectedPickup)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                addItem(selectedPickup.GetComponent<pickupController>().itemName, 0);
-                Destroy(selectedPickup.gameObject);
-                selectedPickup = null;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                addItem(selectedPickup.GetComponent<pickupController>().itemName, 1);
-                Destroy(selectedPickup.gameObject);
-                selectedPickup = null;
-            }
-        }
+        return null;
     }
 }
