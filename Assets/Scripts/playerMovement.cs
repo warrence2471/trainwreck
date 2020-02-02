@@ -7,7 +7,7 @@ public class playerMovement : MonoBehaviour
 {
     Rigidbody rb;
     public Image overlayTint;
-    public int speed = 50;
+    public int speed = 80;
 
     public GameObject maleCharacter;
     public GameObject femaleCharacter;
