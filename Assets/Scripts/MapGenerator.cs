@@ -51,7 +51,11 @@ public class MapGenerator : MonoBehaviour
                     break;
                 }
 
-                layout.Add(CreateTrack(loc, GetRotation(dir)));
+                if (Random.value < 0.2) {
+                    layout.Add(CreateBroken(loc, GetRotation(dir)));
+                } else {
+                    layout.Add(CreateTrack(loc, GetRotation(dir)));
+                }
                 loc += dir;
                 
                 // Stop if we're about to hit the edge
