@@ -129,8 +129,12 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        var locOff = layout[layout.Count - finishOffset].Location;
-        layout.Add(CreateFinish(new Vector2Int(Mathf.RoundToInt(locOff.x), Mathf.RoundToInt(locOff.z)), dir));
+        var item = layout[layout.Count - finishOffset];
+        if (item.Type == MapItemType.Turn)
+        {
+            item = layout[layout.Count - finishOffset - 1];
+        }
+        layout.Add(CreateFinish(new Vector2Int(Mathf.RoundToInt(item.Location.x), Mathf.RoundToInt(item.Location.z)), item.PreviousDirection));
 
         return layout;
     }
