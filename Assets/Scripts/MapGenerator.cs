@@ -55,9 +55,9 @@ public class MapGenerator : MonoBehaviour
                 }
 
                 if (Random.value < 0.2) {
-                    layout.Add(CreateBroken(loc, GetRotation(dir)));
+                    layout.Add(CreateBroken(loc, dir));
                 } else {
-                    layout.Add(CreateTrack(loc, GetRotation(dir)));
+                    layout.Add(CreateTrack(loc, dir));
                 }
                 loc += dir;
                 
