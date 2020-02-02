@@ -2544,7 +2544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 152, y: -75}
+  m_AnchoredPosition: {x: 152, y: -50}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &795907479
@@ -5467,7 +5467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 50, y: 607}
+  m_AnchoredPosition: {x: 50, y: 544}
   m_SizeDelta: {x: -1672, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1764277511
@@ -7452,6 +7452,7 @@ MonoBehaviour:
   itemsNeededToRepair:
   - cowspray
   replaceWith: {fileID: 0}
+  audioOnDestroy: {fileID: 0}
 --- !u!114 &7267212935258484006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7467,6 +7468,7 @@ MonoBehaviour:
   itemsNeededToRepair:
   - cowspray
   replaceWith: {fileID: 0}
+  audioOnDestroy: {fileID: 0}
 --- !u!1 &8296172668024285582 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4743117906048021814, guid: f40ccc34b8f1d4b8482d2000be7b7090,
