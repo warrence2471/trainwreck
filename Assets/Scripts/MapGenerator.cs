@@ -53,7 +53,7 @@ public class MapGenerator : MonoBehaviour
                 if (!CheckValidPlacementStraight(layout, loc))
                 {
                     Debug.Log($"Will not place straight rail at {loc.ToString()} because of invalid placement.");
-                    Backtrack(layout, ref loc, ref dir, 2, false);
+                    Backtrack(layout, ref loc, ref dir, 2);
                     break;
                 }
 
@@ -69,29 +69,32 @@ public class MapGenerator : MonoBehaviour
                 if (loc.x > size || loc.x < -size || loc.y > size || loc.y < -size)
                 {
                     Debug.Log($"Will not place straight rail at {loc.ToString()} because of the edge.");
-                    Backtrack(layout, ref loc, ref dir, 2, true);
+                    Backtrack(layout, ref loc, ref dir, 2);
                     break;
                 }
             }
 
-            if (!CheckValidPlacementTurn(layout, loc))
+            if (j < maxIterations)
             {
-                Debug.Log($"Will not place curved rail at {loc.ToString()} because of invalid placement.");
-                Backtrack(layout, ref loc, ref dir, 2, true);
-            }
+                if (!CheckValidPlacementTurn(layout, loc))
+                {
+                    Debug.Log($"Will not place curved rail at {loc.ToString()} because of invalid placement.");
+                    Backtrack(layout, ref loc, ref dir, 2);
+                }
 
-            var prevDir = dir;
-            if (Random.value < 0.5)
-            {
-                dir.Set(dir.y, -dir.x);
-                layout.Add(CreateTurn(loc, GetRotation(dir) + CTurn, prevDir));
+                var prevDir = dir;
+                if (Random.value < 0.5)
+                {
+                    dir.Set(dir.y, -dir.x);
+                    layout.Add(CreateTurn(loc, GetRotation(dir) + CTurn, prevDir));
+                }
+                else
+                {
+                    dir.Set(-dir.y, dir.x);
+                    layout.Add(CreateTurn(loc, GetRotation(dir), prevDir));
+                }
+                loc += dir;
             }
-            else
-            {
-                dir.Set(-dir.y, dir.x);
-                layout.Add(CreateTurn(loc, GetRotation(dir), prevDir));
-            }
-            loc += dir;
         }
 
         return layout;
@@ -178,10 +181,10 @@ public class MapGenerator : MonoBehaviour
         return true;
     }
 
-    private void Backtrack(List<MapItem> layout, ref Vector2Int loc, ref Vector2Int dir, int steps, bool backtrackAllCurves)
+    private void Backtrack(List<MapItem> layout, ref Vector2Int loc, ref Vector2Int dir, int steps)
     {
         int i = 1;
-        while (i < steps + 1 || (backtrackAllCurves && layout[layout.Count - 1].Type == MapItemType.Turn))
+        while (i < steps + 1 || layout[layout.Count - 1].Type == MapItemType.Turn)
         {
             var item = layout[layout.Count - 1];
             layout.RemoveAt(layout.Count - 1);
