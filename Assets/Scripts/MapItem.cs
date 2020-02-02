@@ -7,8 +7,9 @@ public class MapItem
     public MapItemType Type { get; set; }
     public Vector3 Location { get; set; }
     public Quaternion Rotation { get; set; }
+    public Vector2Int PreviousDirection { get; set; }
 
-    public MapItem(MapItemType type, int x, int z, int rot)
+    public MapItem(MapItemType type, int x, int z, int rot, Vector2Int previousDirection)
     {
         Type = type;
         Location = new Vector3(x, 0, z);
@@ -20,6 +21,7 @@ public class MapItem
         {
             Rotation = Quaternion.Euler(0, rot, 0);
         }
+        PreviousDirection = previousDirection;
     }
 }
 

@@ -16,6 +16,8 @@ public class MapGenerator : MonoBehaviour
     public GameObject finish;
     [SerializeField]
     public int size = 14;
+    [SerializeField]
+    public int maxIterations = 500;
 
     private const int CTurn = 90;
 
@@ -28,26 +30,27 @@ public class MapGenerator : MonoBehaviour
     private IEnumerable<MapItem> MakeMapLayout()
     {
         var layout = new List<MapItem>();
-        //Random.InitState(42);
+        InitRandom();
 
         var loc = new Vector2Int(-size, 0);
         var dir = Vector2Int.right;
-        var edge = size - 1;
-        var stop = false;
 
-        layout.Add(CreateTrack(loc, GetRotation(dir)));
+        layout.Add(CreateTrack(loc, dir));
         loc += dir;
-        layout.Add(CreateTrack(loc, GetRotation(dir)));
+        layout.Add(CreateTrack(loc, dir));
         loc += dir;
 
-        while (!stop)
+        int j = 0; 
+        while (j <= maxIterations)
         {
+            j++;
             for (int i = 0; i < Random.Range(1, 12); i++)
             {
                 // Stop and backtrack if placement invalid 
-                if (!CheckValidPlacement(layout, loc))
+                if (!CheckValidPlacementStraight(layout, loc))
                 {
-                    stop = !Backtrack(layout, ref loc, ref dir, 2);
+                    Debug.Log($"Will not place straight rail at {loc.ToString()} because of invalid placement.");
+                    Backtrack(layout, ref loc, ref dir, 2, false);
                     break;
                 }
 
@@ -59,32 +62,30 @@ public class MapGenerator : MonoBehaviour
                 loc += dir;
                 
                 // Stop if we're about to hit the edge
-                if (loc.x > edge || loc.x < -edge || loc.y > edge || loc.y < -edge)
+                if (loc.x > size || loc.x < -size || loc.y > size || loc.y < -size)
                 {
+                    Debug.Log($"Will not place straight rail at {loc.ToString()} because of the edge.");
+                    Backtrack(layout, ref loc, ref dir, 2, true);
                     break;
                 }
             }
 
-            if (stop)
+            if (!CheckValidPlacementTurn(layout, loc))
             {
-                break;
+                Debug.Log($"Will not place curved rail at {loc.ToString()} because of invalid placement.");
+                Backtrack(layout, ref loc, ref dir, 2, true);
             }
 
-            //if (!CheckValidPlacement(layout, loc))
-            //{
-            //    stop = !Backtrack(layout, ref loc, ref dir, 2);
-            //    break;
-            //}
-
+            var prevDir = dir;
             if (Random.value < 0.5)
             {
                 dir.Set(dir.y, -dir.x);
-                layout.Add(CreateTurn(loc, GetRotation(dir) + CTurn));
+                layout.Add(CreateTurn(loc, GetRotation(dir) + CTurn, prevDir));
             }
             else
             {
                 dir.Set(-dir.y, dir.x);
-                layout.Add(CreateTurn(loc, GetRotation(dir)));
+                layout.Add(CreateTurn(loc, GetRotation(dir), prevDir));
             }
             loc += dir;
         }
@@ -130,7 +131,22 @@ public class MapGenerator : MonoBehaviour
         return Mathf.RoundToInt(Vector2.SignedAngle(direction, Vector2Int.right) / CTurn) * CTurn;
     }
 
-    private bool CheckValidPlacement(List<MapItem> layout, Vector2Int loc)
+    private void InitRandom()
+    {
+        if (PlayerVars.Name != null)
+        {
+            Debug.Log($"Generating a map for player '{PlayerVars.Name}'.");
+            var seed = PlayerVars.Name.GetHashCode();
+            Debug.Log($"Seed is {seed}");
+            Random.InitState(seed);
+        }
+        else
+        {
+            Debug.Log("No seed for map generation");
+        }
+    }
+
+    private bool CheckValidPlacementStraight(List<MapItem> layout, Vector2Int loc)
     {
         for (int k = 0; k < layout.Count; k++)
         {
@@ -145,35 +161,51 @@ public class MapGenerator : MonoBehaviour
         return true;
     }
 
-    private bool Backtrack(List<MapItem> layout, ref Vector2Int loc, ref Vector2Int dir, int steps)
+    private bool CheckValidPlacementTurn(List<MapItem> layout, Vector2Int loc)
     {
-        for (int i = 1; i < steps + 1; i++)
+        for (int k = 0; k < layout.Count; k++)
         {
-            if (layout[layout.Count - 1].Type == MapItemType.Track || layout[layout.Count - 1].Type == MapItemType.Broken)
-            {
-                layout.RemoveAt(layout.Count - 1);
-                loc -= dir;
-            }
-            else
+            // Stop if a turn is hitting anything
+            if (layout[k].Location.x == loc.x && layout[k].Location.z == loc.y)
             {
                 return false;
             }
         }
         return true;
     }
+
+    private void Backtrack(List<MapItem> layout, ref Vector2Int loc, ref Vector2Int dir, int steps, bool backtrackAllCurves)
+    {
+        int i = 1;
+        while (i < steps + 1 || (backtrackAllCurves && layout[layout.Count - 1].Type == MapItemType.Turn))
+        {
+            var item = layout[layout.Count - 1];
+            layout.RemoveAt(layout.Count - 1);
+            loc -= dir;
+            if (item.Type == MapItemType.Turn)
+            {
+                dir = item.PreviousDirection;
+            }
+            //Debug.Log($"Backtracked {(i - 1).ToString()} of {steps.ToString()} times, stopping early.");
+            //return false;
+            i++;
+        }
+        Debug.Log($"Backtracked {i.ToString()} times.");
+        //return true;
+    }
         
-    private MapItem CreateTrack(Vector2Int loc, int rot)
+    private MapItem CreateTrack(Vector2Int loc, Vector2Int dir)
     {
-        return new MapItem(MapItemType.Track, loc.x, loc.y, rot);
+        return new MapItem(MapItemType.Track, loc.x, loc.y, GetRotation(dir), dir);
     }
 
-    private MapItem CreateTurn(Vector2Int loc, int rot)
+    private MapItem CreateTurn(Vector2Int loc, int rot, Vector2Int dir)
     {
-        return new MapItem(MapItemType.Turn, loc.x, loc.y, rot);
+        return new MapItem(MapItemType.Turn, loc.x, loc.y, rot, dir);
     }
 
-    private MapItem CreateBroken(Vector2Int loc, int rot)
+    private MapItem CreateBroken(Vector2Int loc, Vector2Int dir)
     {
-        return new MapItem(MapItemType.Broken, loc.x, loc.y, rot);
+        return new MapItem(MapItemType.Broken, loc.x, loc.y, GetRotation(dir), dir);
     }
 }
