@@ -572,6 +572,7 @@ MonoBehaviour:
   speed: 40
   maleCharacter: {fileID: 318884284}
   femaleCharacter: {fileID: 853772397}
+  painSound: {fileID: 8300000, guid: bd9c91e696b9984f0b6feb1b044b972c, type: 3}
 --- !u!54 &838116220
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -629,6 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b2ee0abd3e04d1ab653f066e6460f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missingItems: {fileID: 8300000, guid: bf54c80727d25a86087f74c676a0d8d8, type: 3}
   items:
   - 
   - 

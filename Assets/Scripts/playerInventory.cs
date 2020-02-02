@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class playerInventory : MonoBehaviour
 {
+    public AudioClip missingItems;
     public List<string> items = new List<string>(2);
 
     private bool hasItem(string itemName)
@@ -64,8 +65,10 @@ public class playerInventory : MonoBehaviour
         List<string> neededItems = repairC.itemsNeededToRepair;
         
         foreach(string neededItem in neededItems) {
-            if (!hasItem(neededItem))
+            if (!hasItem(neededItem)) {
+                if (missingItems) AudioSource.PlayClipAtPoint(missingItems, item.transform.position);
                 return;
+            }
         }
 
         neededItems.ForEach(i => useItem(i));
