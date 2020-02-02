@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7168933694545467420}
   - component: {fileID: 6997936448396007459}
   - component: {fileID: 6997936448396007460}
+  - component: {fileID: 3875398286569093429}
   m_Layer: 0
   m_Name: Game Loco
   m_TagString: Untagged
@@ -79,6 +80,21 @@ MonoBehaviour:
   acceleration: 0.1
   negativeAcceleration: 0.3
   preceding: {fileID: 0}
+--- !u!114 &3875398286569093429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7168933694545467421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be069390a641536baf4e60a466454ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smokeActive: 1
+  smokeFrequency: 0.2
+  smoke: {fileID: 8329025942375127465, guid: ac6bc6a0e07e16343bead010ac8a91db, type: 3}
 --- !u!1001 &4971338275620958755
 PrefabInstance:
   m_ObjectHideFlags: 0
