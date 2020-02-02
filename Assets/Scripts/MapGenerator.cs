@@ -11,15 +11,18 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public GameObject railtrackBroken;
     [SerializeField]
-    public GameTrain[] train;
-    [SerializeField]
     public GameObject finish;
     [SerializeField]
     public int size = 14;
     [SerializeField]
     public int maxIterations = 500;
+    [SerializeField]
+    public int maxBrokenTrails = 5;
+    [SerializeField]
+    public int initialUnbrokenTrails = 10;
 
     private const int CTurn = 90;
+    private int brokenTrailsSoFar = 0;
 
     private void Awake()
     {
@@ -54,8 +57,9 @@ public class MapGenerator : MonoBehaviour
                     break;
                 }
 
-                if (Random.value < 0.2) {
+                if (layout.Count > initialUnbrokenTrails && brokenTrailsSoFar < maxBrokenTrails && Random.value < 0.05) {
                     layout.Add(CreateBroken(loc, dir));
+                    brokenTrailsSoFar += 1;
                 } else {
                     layout.Add(CreateTrack(loc, dir));
                 }

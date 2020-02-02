@@ -13,7 +13,6 @@ public class GameTrain : MonoBehaviour
     [SerializeField]
     public GameTrain preceding;
 
-    private float age = 0.0f;
     private bool isDriving = false;
     private float currentSpeed = 0;
     private float currentTurnAngle;
