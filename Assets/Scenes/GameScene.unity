@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17615715, g: 0.220465, b: 0.30279213, a: 1}
+  m_IndirectSpecularColor: {r: 0.17615695, g: 0.2204646, b: 0.3027915, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -152,13 +152,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupList:
-  - {fileID: 5682946495448619769, guid: 737facfe093ac48a2abc1d70196707f5, type: 3}
+  - {fileID: 4895709656378661252, guid: 7b52c771daff74962a0d452769d8b23e, type: 3}
   - {fileID: 5776656167115667987, guid: ede436c2d3cc544798bccec4ecc0c336, type: 3}
   - {fileID: 6121963497885629006, guid: 4709eb73b1115475b9657f633d510f6f, type: 3}
-  - {fileID: 4895709656378661252, guid: 7b52c771daff74962a0d452769d8b23e, type: 3}
   numberOfObjectsToGenerate: 40
-  maxLeft: 20
-  maxTop: 20
+  groundToSpawn: {fileID: 283033311}
 --- !u!4 &43203545
 Transform:
   m_ObjectHideFlags: 0
@@ -197,6 +195,7 @@ MonoBehaviour:
   - {fileID: -5470126468189855952, guid: 75e4e81dddf2a9249a1147f8f9058261, type: 3}
   - {fileID: -5470126468189855952, guid: db4fd09a606713c47a4e7d7a9a0399d6, type: 3}
   finish: {fileID: 5879257921396132813, guid: 76a829fbd023ff046b391ea0df6576b1, type: 3}
+  size: 14
 --- !u!1001 &119115070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -261,6 +260,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2953783596338653302, guid: 41d094cfc1b4d02469f4a55f94d61e84,
     type: 3}
   m_PrefabInstance: {fileID: 119115070}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &283033311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8346078130603750383, guid: 819b3900f6c7c494b9c7d246882cc971,
+    type: 3}
+  m_PrefabInstance: {fileID: 8346078130345112255}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &318884284 stripped
 GameObject:
@@ -569,9 +574,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overlayTint: {fileID: 800766871}
-  speed: 40
+  speed: 70
   maleCharacter: {fileID: 318884284}
   femaleCharacter: {fileID: 853772397}
+  painSound: {fileID: 8300000, guid: bd9c91e696b9984f0b6feb1b044b972c, type: 3}
 --- !u!54 &838116220
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -629,10 +635,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b2ee0abd3e04d1ab653f066e6460f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missingItems: {fileID: 8300000, guid: bf54c80727d25a86087f74c676a0d8d8, type: 3}
   items:
   - 
   - 
-  uiCanvas: {fileID: 1698352728}
 --- !u!1 &853772397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 1be97d3cc7849ed45846ad1fe654d510,
@@ -679,7 +685,7 @@ Light:
     m_CustomResolution: -1
     m_Strength: 0.75
     m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_NormalBias: 0
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -808,13 +814,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 3, z: -2}
+  m_LocalRotation: {x: 0.51388454, y: -0, z: -0, w: 0.8578594}
+  m_LocalPosition: {x: 1.97, y: 3.48, z: 0.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 61.846004, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,7 +836,7 @@ MonoBehaviour:
   objectToFollow: {fileID: 838116218}
   speed_x: 3
   speed_z: 7
-  offset: 5
+  offset: 2
 --- !u!1001 &998438409
 PrefabInstance:
   m_ObjectHideFlags: 0

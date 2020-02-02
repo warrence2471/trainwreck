@@ -7,10 +7,12 @@ public class playerMovement : MonoBehaviour
 {
     Rigidbody rb;
     public Image overlayTint;
-    public int speed = 50;
+    public int speed = 80;
 
     public GameObject maleCharacter;
     public GameObject femaleCharacter;
+
+    public AudioClip painSound;
 
     // Start is called before the first frame update
     void Start()
@@ -85,8 +87,7 @@ public class playerMovement : MonoBehaviour
         if (other.gameObject.name == "Game Loco") {
             Debug.Log("Aua! Pass doch auf!");
             overlayTint.color = new Color(1, 0, 0, 1);
-            AudioSource audioSource = GetComponent<AudioSource>();
-            audioSource.Play();
+            if (painSound) AudioSource.PlayClipAtPoint(painSound, transform.position);
         } else
             Debug.Log("Autsch");
     }

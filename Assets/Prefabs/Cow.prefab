@@ -156,6 +156,7 @@ MonoBehaviour:
   itemsNeededToRepair:
   - cowspray
   replaceWith: {fileID: 0}
+  audioOnDestroy: {fileID: 8300000, guid: 0552e9e9bfbc3afb9a9a8d4267e5b179, type: 3}
 --- !u!1001 &3267470431330493366
 PrefabInstance:
   m_ObjectHideFlags: 0
