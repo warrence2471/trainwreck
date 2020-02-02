@@ -11,7 +11,11 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public GameObject railtrackBroken;
     [SerializeField]
+    public GameObject cow;
+    [SerializeField]
     public GameObject finish;
+    [SerializeField]
+    public GameObject[] decos;
     [SerializeField]
     public int size = 14;
     [SerializeField]
