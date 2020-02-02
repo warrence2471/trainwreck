@@ -1,13 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class mainMenuBehaviour : MonoBehaviour
 {
     public GameObject maleCharacter;
     public GameObject femaleCharacter;
     public GameObject instructionsPanel;
+    public GameObject textInput;
     [SerializeField]
     private string selectedCharacter = "male";
     private Animator maleAnimator;
@@ -45,6 +46,11 @@ public class mainMenuBehaviour : MonoBehaviour
         PlayerVars.CharacterModel = selectedCharacter;
     }
 
+    public void setName()
+    {
+        var name = textInput.GetComponent<TMP_InputField>().text;
+        PlayerVars.Name = name;
+    }
 
     public void startGame()
     {
