@@ -60,12 +60,13 @@ public class playerMovement : MonoBehaviour
 
         // Look towards mouse cursor
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(mouseRay, out hit)) {
-            Vector3 viewAngle = hit.point - transform.position;
-            Vector3 viewAngleS = new Vector3(viewAngle.x, 0, viewAngle.z); // look straigt
-            rb.MoveRotation(Quaternion.LookRotation(viewAngleS, Vector3.up));
-        }
+        float factor = mouseRay.origin.y / -mouseRay.direction.y;
+        Vector3 viewAngle = new Vector3(
+            mouseRay.origin.x + factor * mouseRay.direction.x - transform.position.x,
+            0,
+            mouseRay.origin.z + factor * mouseRay.direction.z - transform.position.z
+        );
+        rb.MoveRotation(Quaternion.LookRotation(viewAngle, Vector3.up));
 
         if (overlayTint.color.a > 0)
         {
