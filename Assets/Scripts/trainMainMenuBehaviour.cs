@@ -9,7 +9,7 @@ public class trainMainMenuBehaviour : MonoBehaviour
     [SerializeField]
     public GameObject smoke;
     private float age = 0.0f;
-    private float smokeAge = 0.2f;
+    private float smokeAge = 0.05f;
     private float currentSpeed = 0;
     public float maxSpeed = 100;
     public float acceleration = 1;
@@ -29,7 +29,10 @@ public class trainMainMenuBehaviour : MonoBehaviour
           age += Time.deltaTime;
           if (age > smokeAge / (currentSpeed * 20 + 0.01f)) {
             age = 0;
-            Instantiate(smoke, new Vector3(transform.position.x+.6f, transform.position.y+1.2f, transform.position.z-.3f), Quaternion.identity);
+            float xSpin = Random.Range(0, 360);
+            float ySpin = Random.Range(0, 360);
+            float zSpin = Random.Range(0, 360);
+            Instantiate(smoke, new Vector3(transform.position.x+.6f, transform.position.y+1.2f, transform.position.z-.3f), Quaternion.Euler(xSpin, ySpin, zSpin));
           }
         }
 

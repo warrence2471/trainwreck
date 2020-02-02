@@ -49,7 +49,7 @@ public class mainMenuBehaviour : MonoBehaviour
 
     IEnumerator StartGameCoroutine()
     {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(8);
         SceneManager.LoadScene("GameScene");
     }
 }

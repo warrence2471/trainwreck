@@ -22,7 +22,10 @@ public class SmokeEmitter : MonoBehaviour
         if (age > smokeFrequency)
         {
             age = 0;
-            Instantiate(smoke, transform.position + 0.2f * transform.forward + 0.5f * transform.up, Quaternion.identity);
+            float xSpin = Random.Range(0, 360);
+            float ySpin = Random.Range(0, 360);
+            float zSpin = Random.Range(0, 360);
+            Instantiate(smoke, transform.position + 0.2f * transform.forward + 0.5f * transform.up, Quaternion.Euler(xSpin, ySpin, zSpin));
         }
     }
 }
