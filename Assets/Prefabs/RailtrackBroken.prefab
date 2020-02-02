@@ -251,7 +251,9 @@ MonoBehaviour:
   itemsNeededToRepair:
   - wood
   - tool
-  replaceWith: {fileID: 0}
+  replaceWith: {fileID: 4918144307013737507, guid: b402ea41cbb8dc244a78992f4516ff55,
+    type: 3}
+  audioOnDestroy: {fileID: 0}
 --- !u!1001 &6559298361415035669
 PrefabInstance:
   m_ObjectHideFlags: 0
