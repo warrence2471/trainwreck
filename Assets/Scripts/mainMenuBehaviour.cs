@@ -9,23 +9,28 @@ public class mainMenuBehaviour : MonoBehaviour
     public GameObject femaleCharacter;
     public GameObject instructionsPanel;
     public GameObject textInput;
+    public GameObject trafficLightsObject;
     [SerializeField]
     private string selectedCharacter = "male";
     private Animator maleAnimator;
     private Animator femaleAnimator;
     private Animator instructionsAnimator;
+    private trafficLightController trafficLights;
 
     void Awake()
     {
         maleAnimator = maleCharacter.GetComponent<Animator>();
         femaleAnimator = femaleCharacter.GetComponent<Animator>();
         instructionsAnimator = instructionsPanel.GetComponent<Animator>();
+        trafficLights = trafficLightsObject.GetComponent<trafficLightController>();
 
         maleAnimator.SetBool("isVisible", true);
         femaleAnimator.SetBool("isVisible", false);
         instructionsAnimator.SetBool("instructionsVisible", false);
 
         PlayerVars.CharacterModel = selectedCharacter;
+
+        trafficLights.toggleLights();
     }
 
 
